@@ -1,4 +1,5 @@
 from card import Card
+from random import shuffle
 
 class Deck():
     families = ["Hearts", "Diamonds", "Spades", "Clubs"]
@@ -10,8 +11,11 @@ class Deck():
         stringified_deck = ""
         for card in self.cards:
             stringified_deck += f"{card}\n"
-            
+
         return stringified_deck
+
+    def shuffle(self):
+        shuffle(self.cards)
 
     def create_deck(self):
         cards = []
