@@ -7,27 +7,27 @@ class Deck():
     def __init__(self):
         self.cards = self.create_cards()
     
-    def __str__(self):
+    def __str__(self) -> str:
         stringified_deck = ""
         for card in self.cards:
             stringified_deck += f"{card}\n"
 
         return stringified_deck
     
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.cards)
     
-    def deal_cards(self):
-        first_set = [card for index, card in enumerate(self.cards) if index % 2 == 0]
-        second_set = [card for index, card in enumerate(self.cards) if index % 2 != 0]
+    def deal_cards(self) -> tuple[list[Card], list[Card]]:
+        first_set: list[Card] = [card for index, card in enumerate(self.cards) if index % 2 == 0]
+        second_set: list[Card] = [card for index, card in enumerate(self.cards) if index % 2 != 0]
         self.cards = []
 
         return (first_set, second_set)
 
-    def shuffle(self):
+    def shuffle(self) -> None:
         shuffle(self.cards)
 
-    def create_cards(self):
+    def create_cards(self) -> list[Card]:
         cards = []
 
         for family in Deck.suites:
@@ -38,7 +38,7 @@ class Deck():
         return cards
 
     
-    def create_cards_suites(self, suit):
+    def create_cards_suites(self, suit: str) -> list[Card]:
         cards = []
 
         cards.append(Card("Ace", 1, suit))
