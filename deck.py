@@ -5,7 +5,7 @@ class Deck():
     families = ["Hearts", "Diamonds", "Spades", "Clubs"]
 
     def __init__(self):
-        self.cards = self.create_deck()
+        self.cards = self.create_cards()
     
     def __str__(self):
         stringified_deck = ""
@@ -17,18 +17,18 @@ class Deck():
     def shuffle(self):
         shuffle(self.cards)
 
-    def create_deck(self):
+    def create_cards(self):
         cards = []
 
         for family in Deck.families:
-            family_cards = self.create_family(family)
+            family_cards = self.create_cards_family(family)
             for card in family_cards:
                 cards.append(card)
         
         return cards
 
     
-    def create_family(self, family):
+    def create_cards_family(self, family):
         cards = []
 
         cards.append(Card("Ace", 1, family))
