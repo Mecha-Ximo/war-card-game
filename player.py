@@ -20,12 +20,13 @@ class Player():
             return self.cards.pop()
     
     def draw_cards(self, amount: int) -> list[Card]:
-        if len(self) < amount:
-            return self.cards
-        
         cards = []
-        for _ in range(0, amount):
-            cards.append(self.cards.pop())
+        if len(self) < amount:
+            for _ in range(0, len(self)):
+                cards.append(self.cards.pop())
+        else:
+            for _ in range(0, amount):
+                cards.append(self.cards.pop())
         
         return cards
     

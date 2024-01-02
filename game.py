@@ -33,12 +33,16 @@ class Game():
         p1_card = player_1.draw_card()
         p2_card = player_2.draw_card()
 
-        war_bounty += [p1_card, p2_card]
-
         if not p1_card:
+            war_bounty.append(p2_card)
+            player_2.take_cards(war_bounty)
             return player_2
         if not p2_card:
+            war_bounty.append(p1_card)
+            player_1.take_cards(war_bounty)
             return player_1
+        
+        war_bounty += [p1_card, p2_card]
 
         print(f"\n{player_1.name} -> {p1_card} V.S. {p2_card} <- {player_2.name}")
 
@@ -50,6 +54,8 @@ class Game():
             player_2.take_cards(war_bounty)
         else:
             self.log_game_state(player_1, player_2)
-            self.play_turn(player_1, player_2, war_bounty)
+            winner = self.play_turn(player_1, player_2, war_bounty)
+            if winner:
+                return winner
         
         self.log_game_state(player_1, player_2)
