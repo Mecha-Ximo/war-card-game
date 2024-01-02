@@ -18,11 +18,12 @@ class Game():
         player_2 = Player(choose_name(), player2_cards)
 
         return (player_1, player_2)
-    
-    def play_turn(self, player_1: Player, player_2: Player, bounty: list[Card] = []) -> None | Player:
+
+    def log_game_state(self, player_1: Player, player_2: Player) -> None:
         print(f"{player_1.name}: {len(player_1)}")
         print(f"{player_2.name}: {len(player_2)}")
-
+    
+    def play_turn(self, player_1: Player, player_2: Player, bounty: list[Card] = []) -> None | Player:
         if len(bounty):
             print("\nW.A.R\n")
             war_bounty = bounty + player_1.draw_cards(self.amount_of_bounty) + player_2.draw_cards(self.amount_of_bounty)
@@ -48,4 +49,7 @@ class Game():
             print(f"{player_2.name} wins")
             player_2.take_cards(war_bounty)
         else:
+            self.log_game_state(player_1, player_2)
             self.play_turn(player_1, player_2, war_bounty)
+        
+        self.log_game_state(player_1, player_2)
